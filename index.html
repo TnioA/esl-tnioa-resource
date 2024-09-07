@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>ESL - Tnio.A English School</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESL - Tnio.A English School</h1>
+        </div>
+
+        <div class="business-book-content">
+            <h2 class="business-book-title">Business</h2>
+            <ul class="business-book-list">
+                <!-- ... -->
+            </ul>
+        </div>
+
+        <div class="roadmap-book-content">
+            <h2 class="roadmap-book-title">Roadmap</h2>
+            <ul class="roadmap-book-list">
+                <!-- ... -->
+            </ul>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+    <script src="assets/main.js"></script>
+    <script>
+        async function onInit() {
+            const business_book_list = document.querySelector(".business-book-list");
+            const business_data = await getBusinessData();
+            business_book_list.innerHTML = business_data.books.map(element => {
+                return `<li><a href="/book.html?ref=business&book_id=${element.id.replace("+", "plus")}">${element.id.toUpperCase()}</a></li>`
+            }).join("");
+
+            const roadmap_book_list = document.querySelector(".roadmap-book-list");
+            const roadmap_data = await getRoadmapData();
+            roadmap_book_list.innerHTML = roadmap_data.books.map(element => {
+                return `<li><a href="/book.html?ref=roadmap&book_id=${element.id.replace("+", "plus")}">${element.id.toUpperCase()}</a></li>`
+            }).join("");
+        }
+
+        onInit();
+    </script>
+</body>
+
+</html>

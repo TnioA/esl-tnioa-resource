@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>ESL - Tnio.A English School</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESL - Tnio.A English School</h1>
+        </div>
+        <div>
+            <h2 class="ul-title"></h2>
+            <ul class="unit-list">
+                <!-- ... -->
+            </ul>
+        </div>
+    </div>
+    <div class="footer"></div>
+    
+    <script src="assets/main.js"></script>
+    <script>
+        async function onInit() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = getParam("ref");
+            const book_id = getParam("book_id");
+            const unit_list = document.querySelector(".unit-list");
+            const ul_title = document.querySelector(".ul-title");
+
+            switch (ref) {
+                case "business":
+                ul_title.innerHTML = "Business unitites";
+                    data = await getBusinessData();
+                    book = data.books.find(x => x.id == book_id);
+                    unit_list.innerHTML = book.unities.map(element => {
+                        return `<li><a href="/unit.html?ref=${ref}&book_id=${book_id.replace("+", "plus")}&unit_id=${element.id}">${element.id}</a></li>`
+                    }).join("");
+
+                    break;
+                case "roadmap":
+                    ul_title.innerHTML = "Roadmap unitites";
+                    data = await getRoadmapData();
+                    book = data.books.find(x => x.id == book_id);
+                    unit_list.innerHTML = book.unities.map(element => {
+                        return `<li><a href="/unit.html?ref=${ref}&book_id=${book_id.replace("+", "plus")}&unit_id=${element.id}">${element.id}</a></li>`
+                    }).join("");
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        onInit();
+    </script>
+</body>
+
+</html>

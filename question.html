@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>ESL - Tnio.A English School</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESL - Tnio.A English School</h1>
+        </div>
+        <div class="question-data">
+            <!-- ... -->
+        </div>
+    </div>
+    <div class="footer"></div>
+    
+    <script src="assets/main.js"></script>
+    <script>
+        async function onInit() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const question_data = document.querySelector(".question-data");
+            const url = getParam("url");
+
+            question_data.innerHTML = `<iframe allowfullscreen="true" allow="autoplay" frameborder="0" pefcontentrestrictions src="${url}&igu=1"></iframe>`;
+        }
+
+        onInit();
+    </script>
+</body>
+
+</html>

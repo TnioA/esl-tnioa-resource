@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>ESL - Tnio.A English School</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESL - Tnio.A English School</h1>
+        </div>
+        <div>
+            <h2 class="ul-title"></h2>
+            <ul class="exercise-list">
+                <!-- ... -->
+            </ul>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+    <script src="assets/main.js"></script>
+    <script>
+        async function onInit() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = getParam("ref");
+            const book_id = getParam("book_id");
+            const unit_id = getParam("unit_id");
+            const exercise_list = document.querySelector(".exercise-list");
+            const ul_title = document.querySelector(".ul-title");
+
+            switch (ref) {
+                case "business":
+                    ul_title.innerHTML = `Business ${book_id.toUpperCase()}/${unit_id.replace("Unit ", "")} exercises`;
+                    data = await getBusinessData();
+                    book = data.books.find(x => x.id == book_id);
+                    unit = book.unities.find(x => x.id == unit_id);
+                    exercise_list.innerHTML = unit.exercises.map(element => {
+                        return `<li><a href="/exercise.html?ref=${ref}&book_id=${book_id.replace("+", "plus")}&unit_id=${unit_id}&exercise_id=${element.id}">Exercise ${element.id}</a></li>`
+                    }).join("");
+
+                    break;
+                case "roadmap":
+                    ul_title.innerHTML = `Roadmap ${book_id.toUpperCase()}/${unit_id.replace("Unit ", "")} exercises`;
+                    data = await getRoadmapData();
+                    book = data.books.find(x => x.id == book_id);
+                    unit = book.unities.find(x => x.id == unit_id);
+                    exercise_list.innerHTML = unit.exercises.map(element => {
+                        return `<li><a href="/exercise.html?ref=${ref}&book_id=${book_id.replace("+", "plus")}&unit_id=${unit_id}&exercise_id=${element.id}">Exercise ${element.id}</a></li>`
+                    }).join("");
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        onInit();
+    </script>
+</body>
+
+</html>
